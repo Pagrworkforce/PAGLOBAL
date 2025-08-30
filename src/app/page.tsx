@@ -7,6 +7,7 @@ import { MissionSection } from '@/components/landing/mission-section';
 import { MovementBanner } from '@/components/landing/movement-banner';
 import { PartnersSection } from '@/components/landing/partners-section';
 import { PillarsSection } from '@/components/landing/pillars-section';
+import { WhoWeServeSection } from '@/components/landing/who-we-serve-section';
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <EcosystemSection />
         <PillarsSection />
         <CtaSection />
+        <WhoWeServeSection />
         <MovementBanner />
       </main>
       <Footer />
