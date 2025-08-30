@@ -6,7 +6,7 @@ export function HeroSection() {
   return (
     <section className="relative h-[80vh] min-h-[600px] w-full">
       <Image
-        src="https://picsum.photos/1920/1080"
+        src="https://equitablegrowth.org/wp-content/uploads/2025/05/Job-quality-1080x675.jpeg"
         alt="African workforce"
         data-ai-hint="african workforce"
         fill
