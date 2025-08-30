@@ -98,7 +98,7 @@ export function CtaSection() {
               </ul>
                 <Button size="lg" className="w-full md:w-auto mt-auto" asChild>
                   <Link href="/contact#partners">
-                    👉 Contact Us <ArrowRight className="ml-2 h-4 w-4" />
+                    👉 Join for free <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
             </CardContent>
