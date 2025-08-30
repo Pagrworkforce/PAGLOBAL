@@ -269,7 +269,7 @@ export default function PlatformsPage() {
                     </p>
                     <Accordion type="single" collapsible className="w-full mt-6">
                       <AccordionItem value="item-1" className="border-none">
-                        <div className="flex gap-4">
+                        <div className="flex flex-col gap-4 sm:flex-row">
                            <AccordionTrigger className="w-full justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:hidden">
                              Read More
                            </AccordionTrigger>
@@ -336,7 +336,7 @@ export default function PlatformsPage() {
                     </p>
                      <Accordion type="single" collapsible className="w-full mt-6">
                       <AccordionItem value="item-1" className="border-none">
-                        <div className="flex gap-4">
+                        <div className="flex flex-col gap-4 sm:flex-row">
                            <AccordionTrigger className="w-full justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:hidden">
                              Read More
                            </AccordionTrigger>

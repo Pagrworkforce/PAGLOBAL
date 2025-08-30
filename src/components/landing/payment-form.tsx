@@ -155,12 +155,12 @@ function PaymentFormComponent() {
                     </FormItem>
                   )}
                 />
-                <div className="flex items-center justify-between pt-4">
-                  <Button variant="outline" type="button" onClick={() => router.back()}>
+                <div className="flex flex-col-reverse items-center gap-4 pt-4 sm:flex-row sm:justify-between">
+                  <Button variant="outline" type="button" onClick={() => router.back()} className="w-full sm:w-auto">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back to Form
                   </Button>
-                  <Button type="submit" disabled={form.formState.isSubmitting}>
+                  <Button type="submit" disabled={form.formState.isSubmitting} className="w-full sm:w-auto">
                     {form.formState.isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     I have sent payment
                   </Button>

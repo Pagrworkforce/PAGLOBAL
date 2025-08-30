@@ -47,33 +47,35 @@ export function MovementBanner() {
                         🔍 What Makes PAGR Different?
                     </h2>
                      <Card>
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>Feature</TableHead>
-                                    <TableHead className="text-center text-primary">PAGR</TableHead>
-                                    <TableHead className="text-center">Traditional Systems</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {comparisonData.map((row) => (
-                                    <TableRow key={row.feature}>
-                                        <TableCell className="font-medium">{row.feature}</TableCell>
-                                        <TableCell className="text-center">
-                                            {row.pagr ? (
-                                                <div className="flex flex-col items-center justify-center">
-                                                    <Check className="h-6 w-6 text-green-500" />
-                                                    {row.pagrText && <span className="text-xs text-muted-foreground">{row.pagrText}</span>}
-                                                </div>
-                                            ) : <X className="mx-auto h-6 w-6 text-red-500" />}
-                                        </TableCell>
-                                        <TableCell className="text-center">
-                                            {row.traditional ? <Check className="mx-auto h-6 w-6 text-green-500" /> : <X className="mx-auto h-6 w-6 text-red-500" />}
-                                        </TableCell>
+                        <div className="overflow-x-auto">
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Feature</TableHead>
+                                        <TableHead className="text-center text-primary">PAGR</TableHead>
+                                        <TableHead className="text-center">Traditional Systems</TableHead>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
+                                </TableHeader>
+                                <TableBody>
+                                    {comparisonData.map((row) => (
+                                        <TableRow key={row.feature}>
+                                            <TableCell className="font-medium">{row.feature}</TableCell>
+                                            <TableCell className="text-center">
+                                                {row.pagr ? (
+                                                    <div className="flex flex-col items-center justify-center">
+                                                        <Check className="h-6 w-6 text-green-500" />
+                                                        {row.pagrText && <span className="text-xs text-muted-foreground">{row.pagrText}</span>}
+                                                    </div>
+                                                ) : <X className="mx-auto h-6 w-6 text-red-500" />}
+                                            </TableCell>
+                                            <TableCell className="text-center">
+                                                {row.traditional ? <Check className="mx-auto h-6 w-6 text-green-500" /> : <X className="mx-auto h-6 w-6 text-red-500" />}
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </div>
                     </Card>
                 </div>
             </div>
