@@ -18,7 +18,7 @@ export function Footer() {
           <ul className="space-y-2 text-sm">
             <li>
               <Link
-                href="#about"
+                href="/about"
                 className="text-muted-foreground hover:text-primary"
               >
                 About
