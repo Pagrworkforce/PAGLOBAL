@@ -11,8 +11,16 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Loader2 } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Loader2, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+} from '@/components/ui/alert-dialog';
+
 
 const industries = [
   'Agriculture & Farming',
@@ -81,6 +89,7 @@ function RegistrationFormComponent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { toast } = useToast();
+  const [isSuccess, setIsSuccess] = useState(false);
   const tier = searchParams.get('tier') || 'worker';
   const details = tierDetails[tier as keyof typeof tierDetails] || tierDetails.worker;
 
@@ -99,17 +108,8 @@ function RegistrationFormComponent() {
   const watchedIndustry = form.watch('industry');
 
   const onSubmit = async (values: FormValues) => {
-    // This is where you would handle form submission to your backend.
-    // For now, we'll navigate to the payment page with the form data.
-    
     if (details.fee === 'Free') {
-        // For partners, you might have a different flow, e.g. showing a thank you message directly.
-        toast({
-            title: "Application Submitted!",
-            description: "Thank you for your interest in partnering with PAGR. We will be in touch shortly.",
-        });
-        form.reset();
-        router.push('/');
+        setIsSuccess(true);
         return;
     }
     
@@ -121,6 +121,30 @@ function RegistrationFormComponent() {
     });
     router.push(`/payment?${params.toString()}`);
   };
+
+  if (isSuccess && details.fee === 'Free') {
+      return (
+         <AlertDialog open={isSuccess} onOpenChange={() => router.push('/')}>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                <div className="flex justify-end">
+                     <button onClick={() => router.push('/')} className="p-1 rounded-full hover:bg-muted">
+                        <X className="h-4 w-4" />
+                        <span className="sr-only">Close</span>
+                    </button>
+                </div>
+                <div className="text-center pb-6">
+                    <CheckCircle className="mx-auto h-16 w-16 text-green-500 mb-4" />
+                    <AlertDialogTitle className="text-2xl">Application Submitted!</AlertDialogTitle>
+                    <AlertDialogDescription className="mt-2 max-w-sm mx-auto text-muted-foreground">
+                        Thank you for your interest in partnering with PAGR. We will be in touch shortly.
+                    </AlertDialogDescription>
+                </div>
+                </AlertDialogHeader>
+            </AlertDialogContent>
+        </AlertDialog>
+      )
+  }
 
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-primary/5">
