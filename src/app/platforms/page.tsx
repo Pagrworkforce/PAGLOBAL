@@ -37,7 +37,7 @@ const pillars = [
         },
         {
           type: 'Semi-formal',
-          text: "A tailor who trained 30 apprentices has their work rated and verified",
+          text: 'A tailor who trained 30 apprentices has their work rated and verified',
         },
         {
           type: 'Informal',
@@ -59,6 +59,26 @@ const pillars = [
       'A time-based financial system that converts productive hours into digital currency (Workoin/Time Credits) redeemable for...',
     color: 'text-green-500',
     bgColor: 'bg-green-50',
+    details: {
+      features: [
+        {
+          type: 'Formal',
+          text: "Call-center worker earns extra 'Workoins' for verified overtime hours",
+        },
+        {
+          type: 'Semi-formal',
+          text: 'School teacher converts tutoring hours into Workoins for groceries',
+        },
+        {
+          type: 'Informal',
+          text: 'Ride-hailing driver uses Workoins to pay for fuel or airtime',
+        },
+      ],
+      benefits: [
+        'Workers earn from time and get micro-loans from effort',
+        'Employers get transparent payroll innovation',
+      ],
+    },
   },
   {
     id: 'jobxpat',
@@ -69,6 +89,26 @@ const pillars = [
       'An AI platform where businesses upload knowledge. AI converts it into role-based interactive courses, with assessments, ...',
     color: 'text-purple-500',
     bgColor: 'bg-purple-50',
+    details: {
+        features: [
+            {
+                type: 'Formal',
+                text: 'Fintech uploads compliance SOPs → AI generates training → staff get certified'
+            },
+            {
+                type: 'Semi-formal',
+                text: 'Logistics firm uploads driver safety rules → converted into e-course'
+            },
+            {
+                type: 'Informal',
+                text: 'Hair salon owner uploads tutorials → stylists train & get certified'
+            }
+        ],
+        benefits: [
+            'Workers get affordable, job-ready skills',
+            'Employers get tailored, scalable workforce training'
+        ]
+    }
   },
   {
     id: 'mezziah',
@@ -79,6 +119,26 @@ const pillars = [
       'An AI mentor that provides contextual guidance for career, financial literacy, and work-life balance decisions.',
     color: 'text-orange-500',
     bgColor: 'bg-orange-50',
+    details: {
+        features: [
+            {
+                type: 'Formal',
+                text: 'Doctor gets AI guidance on managing burnout and time management'
+            },
+            {
+                type: 'Semi-formal',
+                text: 'Sales rep receives AI coaching on daily targets and client handling'
+            },
+            {
+                type: 'Informal',
+                text: 'Market trader gets budgeting advice to separate business from personal spending'
+            }
+        ],
+        benefits: [
+            'Workers get personalized growth support',
+            'Employers get more focused, productive employees'
+        ]
+    }
   },
   {
     id: 'libra',
@@ -89,6 +149,26 @@ const pillars = [
       'A digital community & advocacy hub that educates workers about rights, provides anonymous reporting, and links them to l...',
     color: 'text-red-500',
     bgColor: 'bg-red-50',
+    details: {
+        features: [
+            {
+                type: 'Formal',
+                text: 'Bank staff anonymously reports unfair dismissal practices'
+            },
+            {
+                type: 'Semi-formal',
+                text: 'Factory worker learns about minimum wage laws in their state'
+            },
+            {
+                type: 'Informal',
+                text: 'Domestic worker gets connected to NGO for legal aid in wage theft'
+            }
+        ],
+        benefits: [
+            'Workers get protection and collective voice',
+            'Employers get framework for fair practices'
+        ]
+    }
   },
 ];
 
