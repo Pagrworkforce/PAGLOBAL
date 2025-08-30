@@ -6,8 +6,6 @@ import {
   Scale,
 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
-import { JobXpatTool } from './ai/jobxpat-tool';
-import { MezziahAssistant } from './ai/mezziah-assistant';
 
 const pillars = [
   {
@@ -139,8 +137,6 @@ export function PillarsSection() {
                     </ul>
                   </div>
                 </div>
-                {pillar.id === 'jobxpat' && <JobXpatTool />}
-                {pillar.id === 'mezziah' && <MezziahAssistant />}
               </div>
             </TabsContent>
           ))}
