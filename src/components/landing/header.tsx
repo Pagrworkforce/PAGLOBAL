@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Rocket } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { ThemeToggle } from '../theme-toggle';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -37,11 +38,13 @@ export function Header() {
           ))}
         </nav>
         <div className="hidden items-center gap-4 md:flex">
+          <ThemeToggle />
           <Button asChild>
             <Link href="/contact#join">Register Today</Link>
           </Button>
         </div>
-        <div className="md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
