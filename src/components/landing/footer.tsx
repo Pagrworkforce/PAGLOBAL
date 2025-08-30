@@ -34,7 +34,7 @@ export function Footer() {
             </li>
             <li>
               <Link
-                href="#workers"
+                href="/contact#workers"
                 className="text-muted-foreground hover:text-primary"
               >
                 For Workers
@@ -42,7 +42,7 @@ export function Footer() {
             </li>
             <li>
               <Link
-                href="#employers"
+                href="/contact#employers"
                 className="text-muted-foreground hover:text-primary"
               >
                 For Employers

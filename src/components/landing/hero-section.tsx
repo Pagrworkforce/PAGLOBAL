@@ -27,10 +27,10 @@ export function HeroSection() {
             </p>
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
               <Button asChild size="lg">
-                <Link href="#workers">👉 Join as a Worker</Link>
+                <Link href="/contact#workers">👉 Join as a Worker</Link>
               </Button>
               <Button asChild size="lg" variant="secondary">
-                <Link href="#employers">👉 Join as an Employer</Link>
+                <Link href="/contact#employers">👉 Join as an Employer</Link>
               </Button>
             </div>
           </div>

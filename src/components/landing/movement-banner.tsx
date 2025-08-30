@@ -87,7 +87,7 @@ export function MovementBanner() {
                   future where every worker can thrive.
                 </p>
                 <Button size="lg" className="mt-8" asChild>
-                  <Link href="#workers">👉 Register Today</Link>
+                  <Link href="/contact#join">👉 Register Today</Link>
                 </Button>
             </div>
         </div>

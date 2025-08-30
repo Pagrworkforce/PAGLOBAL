@@ -9,8 +9,6 @@ import { useState } from 'react';
 const navLinks = [
   { href: '/about', label: 'About' },
   { href: '/platforms', label: 'Platforms' },
-  { href: '#workers', label: 'Workers' },
-  { href: '#employers', label: 'Employers' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -39,7 +37,7 @@ export function Header() {
         </nav>
         <div className="hidden items-center gap-4 md:flex">
           <Button asChild>
-            <Link href="#workers">Register Today</Link>
+            <Link href="/contact#join">Register Today</Link>
           </Button>
         </div>
         <div className="md:hidden">
@@ -72,7 +70,7 @@ export function Header() {
                 </nav>
                 <div className="mt-auto border-t p-4">
                    <Button className="w-full" asChild>
-                     <Link href="#workers" onClick={() => setIsSheetOpen(false)}>Register Today</Link>
+                     <Link href="/contact#join" onClick={() => setIsSheetOpen(false)}>Register Today</Link>
                    </Button>
                 </div>
               </div>

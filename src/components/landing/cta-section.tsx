@@ -1,6 +1,7 @@
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import Link from 'next/link';
 
 const workerBenefits = [
   'Get your WorkID and be recognized as a professional.',
@@ -26,7 +27,7 @@ export function CtaSection() {
     <section className="w-full bg-primary/5 py-12 md:py-24 lg:py-32">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid items-start gap-12 lg:grid-cols-3">
-          <Card id="workers" className="flex flex-col transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
+          <Card id="workers-cta" className="flex flex-col transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
             <CardHeader>
               <CardTitle className="font-headline text-3xl text-primary md:text-4xl">
                 For Workers
@@ -45,12 +46,14 @@ export function CtaSection() {
                   </li>
                 ))}
               </ul>
-              <Button size="lg" className="w-full md:w-auto mt-auto">
-                👉 Join as a Worker <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+                <Button size="lg" className="w-full md:w-auto mt-auto" asChild>
+                  <Link href="/contact#workers">
+                    👉 Join as a Worker <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
             </CardContent>
           </Card>
-          <Card id="employers" className="flex flex-col transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
+          <Card id="employers-cta" className="flex flex-col transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
             <CardHeader>
               <CardTitle className="font-headline text-3xl text-primary md:text-4xl">
                 For Employers
@@ -68,12 +71,14 @@ export function CtaSection() {
                   </li>
                 ))}
               </ul>
-              <Button size="lg" className="w-full md:w-auto mt-auto">
-                👉 Join as an Employer <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+                <Button size="lg" className="w-full md:w-auto mt-auto" asChild>
+                  <Link href="/contact#employers">
+                    👉 Join as an Employer <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
             </CardContent>
           </Card>
-          <Card id="partners" className="flex flex-col transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl lg:col-span-1">
+          <Card id="partners-cta" className="flex flex-col transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl lg:col-span-1">
             <CardHeader>
               <CardTitle className="font-headline text-3xl text-primary md:text-4xl">
                 Strategic Partners
@@ -91,9 +96,11 @@ export function CtaSection() {
                   </li>
                 ))}
               </ul>
-              <Button size="lg" className="w-full md:w-auto mt-auto">
-                👉 Contact Us <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+                <Button size="lg" className="w-full md:w-auto mt-auto" asChild>
+                  <Link href="/contact#partners">
+                    👉 Contact Us <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
             </CardContent>
           </Card>
         </div>

@@ -6,6 +6,7 @@ import { ArrowRight, CheckCircle, Phone, Banknote, Building } from 'lucide-react
 
 const registrationTiers = [
   {
+    id: 'workers',
     title: 'Join as Worker',
     description: 'Access WorkID, SecondBank, JobXpat training, and more.',
     price: '₦2,000',
@@ -13,6 +14,7 @@ const registrationTiers = [
     buttonText: 'Get Started',
   },
   {
+    id: 'employers',
     title: 'Employer Partnership',
     description: 'Access our talent pool and workforce infrastructure.',
     price: '₦10,000',
@@ -20,6 +22,7 @@ const registrationTiers = [
     buttonText: 'Get Started',
   },
   {
+    id: 'partners',
     title: 'Strategic Partnership',
     description: 'Government, NGO, or institutional collaboration.',
     price: 'Free',
@@ -59,7 +62,7 @@ export default function ContactPage() {
           </div>
         </section>
 
-        <section id="join" className="w-full bg-primary/5 py-12 md:py-24 lg:py-32">
+        <section id="join" className="w-full scroll-mt-20 bg-primary/5 py-12 md:py-24 lg:py-32">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center">
               <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
@@ -71,7 +74,7 @@ export default function ContactPage() {
             </div>
             <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {registrationTiers.map((tier) => (
-                <Card key={tier.title} className="flex transform flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                <Card id={tier.id} key={tier.title} className="flex transform flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
                   <CardHeader>
                     <CardTitle className="font-headline text-2xl text-primary">{tier.title}</CardTitle>
                     <p className="text-muted-foreground pt-2">{tier.description}</p>
