@@ -26,7 +26,7 @@ export function Footer() {
             </li>
             <li>
               <Link
-                href="#platforms"
+                href="/platforms"
                 className="text-muted-foreground hover:text-primary"
               >
                 Platforms
