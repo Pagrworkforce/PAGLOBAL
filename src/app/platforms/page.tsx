@@ -18,6 +18,7 @@ import {
   CheckCircle,
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const pillars = [
   {
@@ -208,18 +209,26 @@ export default function PlatformsPage() {
     <div className="flex min-h-dvh flex-col bg-background text-foreground">
       <Header />
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="mx-auto max-w-3xl text-center">
-              <h1 className="font-headline text-3xl font-bold tracking-tighter text-primary sm:text-5xl">
-                🧱 Our Innovation Platforms
-              </h1>
-              <p className="mt-4 text-lg text-muted-foreground md:text-xl">
-                Five interconnected platforms designed to transform work into
-                wealth, dignity, and opportunity for every African worker.
-              </p>
+        <section className="relative w-full py-20 md:py-32 lg:py-40">
+           <Image
+              src="https://equitablegrowth.org/wp-content/uploads/2022/12/Happy-workers-1080x675.png"
+              alt="Diverse workforce"
+              data-ai-hint="diverse workforce"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-primary/80" />
+            <div className="relative z-10 container mx-auto px-4 md:px-6">
+                <div className="mx-auto max-w-3xl text-center">
+                <h1 className="font-headline text-3xl font-bold tracking-tighter text-primary-foreground sm:text-5xl">
+                    🧱 Our Innovation Platforms
+                </h1>
+                <p className="mt-4 text-lg text-primary-foreground/90 md:text-xl">
+                    Five interconnected platforms designed to transform work into
+                    wealth, dignity, and opportunity for every African worker.
+                </p>
+                </div>
             </div>
-          </div>
         </section>
 
         <section
