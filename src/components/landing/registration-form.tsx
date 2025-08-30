@@ -60,13 +60,13 @@ const tierDetails = {
   worker: {
     title: 'Join as Worker',
     description: 'Access WorkID, SecondBank, JobXpat training, and more.',
-    fee: '₦2,000',
+    fee: '2000',
     submitText: 'Proceed to Payment',
   },
   employer: {
     title: 'Employer Partnership',
     description: 'Access our talent pool and workforce infrastructure.',
-    fee: '₦10,000',
+    fee: '10000',
     submitText: 'Proceed to Payment',
   },
   partner: {
@@ -99,15 +99,27 @@ function RegistrationFormComponent() {
   const watchedIndustry = form.watch('industry');
 
   const onSubmit = async (values: FormValues) => {
-    // Here you would typically handle form submission, e.g., API call
-    console.log(values);
-    toast({
-        title: "Registration Submitted!",
-        description: "Thank you for joining the PAGR movement. We will be in touch shortly.",
+    // This is where you would handle form submission to your backend.
+    // For now, we'll navigate to the payment page with the form data.
+    
+    if (details.fee === 'Free') {
+        // For partners, you might have a different flow, e.g. showing a thank you message directly.
+        toast({
+            title: "Application Submitted!",
+            description: "Thank you for your interest in partnering with PAGR. We will be in touch shortly.",
+        });
+        form.reset();
+        router.push('/');
+        return;
+    }
+    
+    const params = new URLSearchParams({
+        tier,
+        fee: details.fee,
+        fullName: values.fullName,
+        email: values.email,
     });
-    // For demo purposes, we'll just log and show a toast
-    // In a real app, you might redirect to a payment page or a thank you page.
-    form.reset();
+    router.push(`/payment?${params.toString()}`);
   };
 
   return (
@@ -119,7 +131,7 @@ function RegistrationFormComponent() {
             <CardDescription>{details.description}</CardDescription>
             <div className="pt-4">
                 <p className='text-sm text-muted-foreground'>Registration Fee</p>
-                <p className="font-headline text-4xl font-bold">{details.fee}</p>
+                <p className="font-headline text-4xl font-bold">{details.fee === 'Free' ? 'Free' : `₦${parseInt(details.fee).toLocaleString()}`}</p>
             </div>
           </CardHeader>
           <CardContent>
