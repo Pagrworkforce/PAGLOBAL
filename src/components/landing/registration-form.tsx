@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -40,9 +40,19 @@ const formSchema = z.object({
   phone: z.string().min(10, 'Please enter a valid phone number.'),
   skills: z.string().min(3, 'Please list at least one skill.'),
   industry: z.string({ required_error: 'Please select an industry.' }),
+  otherIndustry: z.string().optional(),
   experienceLevel: z.string({ required_error: 'Please select your experience level.' }),
   goals: z.string().min(10, 'Please tell us a bit about your goals.'),
+}).refine(data => {
+    if (data.industry === 'Others (please specify)') {
+        return !!data.otherIndustry && data.otherIndustry.length > 0;
+    }
+    return true;
+}, {
+    message: 'Please specify your industry',
+    path: ['otherIndustry'],
 });
+
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -82,8 +92,11 @@ function RegistrationFormComponent() {
       phone: '',
       skills: '',
       goals: '',
+      otherIndustry: '',
     },
   });
+
+  const watchedIndustry = form.watch('industry');
 
   const onSubmit = async (values: FormValues) => {
     // Here you would typically handle form submission, e.g., API call
@@ -191,6 +204,23 @@ function RegistrationFormComponent() {
                             </FormItem>
                         )}
                     />
+                    {watchedIndustry === 'Others (please specify)' && (
+                         <FormField
+                            control={form.control}
+                            name="otherIndustry"
+                            render={({ field }) => (
+                                <FormItem>
+                                <FormLabel>Please Specify Industry</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="e.g., Freelance Writing" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    )}
+                 </div>
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FormField
                         control={form.control}
                         name="experienceLevel"
@@ -258,4 +288,3 @@ export function RegistrationForm() {
         </Suspense>
     )
 }
-
