@@ -3,6 +3,7 @@ import { Header } from '@/components/landing/header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, CheckCircle, Phone, Banknote, Building } from 'lucide-react';
+import Link from 'next/link';
 
 const registrationTiers = [
   {
@@ -12,6 +13,7 @@ const registrationTiers = [
     price: '₦2,000',
     features: ['Early membership benefits'],
     buttonText: 'Get Started',
+    href: '/register?tier=worker'
   },
   {
     id: 'employers',
@@ -20,6 +22,7 @@ const registrationTiers = [
     price: '₦10,000',
     features: ['Early membership + workforce development program'],
     buttonText: 'Get Started',
+    href: '/register?tier=employer'
   },
   {
     id: 'partners',
@@ -28,6 +31,7 @@ const registrationTiers = [
     price: 'Free',
     features: ['Direct consultation with our team'],
     buttonText: 'Get Started',
+    href: '/register?tier=partner'
   },
 ];
 
@@ -92,8 +96,10 @@ export default function ContactPage() {
                       ))}
                     </ul>
                     <div className="mt-auto">
-                        <Button size="lg" className="w-full">
-                           {tier.buttonText} <ArrowRight className="ml-2 h-4 w-4" />
+                        <Button size="lg" className="w-full" asChild>
+                           <Link href={tier.href}>
+                             {tier.buttonText} <ArrowRight className="ml-2 h-4 w-4" />
+                           </Link>
                         </Button>
                     </div>
                   </CardContent>
