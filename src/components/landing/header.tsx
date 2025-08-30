@@ -11,6 +11,7 @@ const navLinks = [
   { href: '#platforms', label: 'Platforms' },
   { href: '#workers', label: 'Workers' },
   { href: '#employers', label: 'Employers' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export function Header() {
@@ -37,9 +38,6 @@ export function Header() {
           ))}
         </nav>
         <div className="hidden items-center gap-4 md:flex">
-          <Button variant="ghost" asChild>
-            <a href="mailto:contact@pagr.africa">Contact</a>
-          </Button>
           <Button asChild>
             <Link href="#workers">Register Today</Link>
           </Button>
@@ -71,13 +69,6 @@ export function Header() {
                       {link.label}
                     </Link>
                   ))}
-                  <a
-                      href="mailto:contact@pagr.africa"
-                      className="text-lg font-medium text-muted-foreground"
-                      onClick={() => setIsSheetOpen(false)}
-                    >
-                      Contact
-                    </a>
                 </nav>
                 <div className="mt-auto border-t p-4">
                    <Button className="w-full" asChild>

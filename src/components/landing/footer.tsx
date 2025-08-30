@@ -49,12 +49,12 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <a
-                href="mailto:contact@pagr.africa"
+              <Link
+                href="/contact"
                 className="text-muted-foreground hover:text-primary"
               >
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
