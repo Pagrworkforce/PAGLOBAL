@@ -26,7 +26,7 @@ const platforms = [
   {
     icon: Bot,
     name: 'Mezziah',
-    description: 'Workforce protection & benefits.',
+    description: 'WorkLife & Career guidance',
   },
   {
     icon: Scale,
