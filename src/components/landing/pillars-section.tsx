@@ -99,7 +99,7 @@ export function PillarsSection() {
           </div>
         </div>
         <Tabs defaultValue="workid" className="mt-12 w-full">
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
+          <TabsList className="grid h-auto w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-5 md:h-10">
             {pillars.map((pillar) => (
               <TabsTrigger key={pillar.id} value={pillar.id} className="gap-2">
                 <pillar.icon className="h-4 w-4" />
