@@ -41,28 +41,43 @@ const industries = [
 ];
 
 const experienceLevels = ['Entry-level', 'Mid-level', 'Senior', 'Expert'];
+const companySizes = ['Startup (1-10 employees)', 'Small (11-50 employees)', 'Medium (51-250 employees)', 'Large (251+ employees)'];
 
-const formSchema = z.object({
+const baseSchema = z.object({
   fullName: z.string().min(2, 'Full name must be at least 2 characters.'),
   email: z.string().email('Please enter a valid email address.'),
   phone: z.string().min(10, 'Please enter a valid phone number.'),
-  skills: z.string().min(3, 'Please list at least one skill.'),
   industry: z.string({ required_error: 'Please select an industry.' }),
   otherIndustry: z.string().optional(),
-  experienceLevel: z.string({ required_error: 'Please select your experience level.' }),
-  goals: z.string().min(10, 'Please tell us a bit about your goals.'),
-}).refine(data => {
-    if (data.industry === 'Others (please specify)') {
-        return !!data.otherIndustry && data.otherIndustry.length > 0;
-    }
-    return true;
-}, {
-    message: 'Please specify your industry',
-    path: ['otherIndustry'],
 });
 
+const workerSchema = baseSchema.extend({
+    skills: z.string().min(3, 'Please list at least one skill.'),
+    experienceLevel: z.string({ required_error: 'Please select your experience level.' }),
+    goals: z.string().min(10, 'Please tell us a bit about your goals.'),
+    companyName: z.string().optional(),
+    companySize: z.string().optional(),
+    workforceNeeds: z.string().optional(),
+});
 
-type FormValues = z.infer<typeof formSchema>;
+const employerSchema = baseSchema.extend({
+    companyName: z.string().min(2, 'Company name must be at least 2 characters.'),
+    companySize: z.string({ required_error: 'Please select your company size.' }),
+    workforceNeeds: z.string().min(10, 'Please describe your workforce needs.'),
+    skills: z.string().optional(),
+    experienceLevel: z.string().optional(),
+    goals: z.string().optional(),
+});
+
+const partnerSchema = baseSchema.extend({
+    companyName: z.string().min(2, 'Organization name must be at least 2 characters.'),
+    workforceNeeds: z.string().min(10, 'Please describe your partnership goals.'),
+    skills: z.string().optional(),
+    experienceLevel: z.string().optional(),
+    goals: z.string().optional(),
+    companySize: z.string().optional(),
+});
+
 
 const tierDetails = {
   worker: {
@@ -70,20 +85,37 @@ const tierDetails = {
     description: 'Access WorkID, SecondBank, JobXpat training, and more.',
     fee: '2000',
     submitText: 'Proceed to Payment',
+    schema: workerSchema,
   },
   employer: {
     title: 'Employer Partnership',
     description: 'Access our talent pool and workforce infrastructure.',
     fee: '10000',
     submitText: 'Proceed to Payment',
+    schema: employerSchema,
   },
   partner: {
     title: 'Strategic Partnership',
     description: 'Government, NGO, or institutional collaboration.',
     fee: 'Free',
     submitText: 'Submit Application',
+    schema: partnerSchema,
   },
 };
+
+function getFormSchema(tier: string) {
+    const schema = tierDetails[tier as keyof typeof tierDetails]?.schema || workerSchema;
+    return schema.refine(data => {
+        if (data.industry === 'Others (please specify)') {
+            return !!data.otherIndustry && data.otherIndustry.length > 0;
+        }
+        return true;
+    }, {
+        message: 'Please specify your industry',
+        path: ['otherIndustry'],
+    });
+}
+
 
 function RegistrationFormComponent() {
   const router = useRouter();
@@ -92,6 +124,10 @@ function RegistrationFormComponent() {
   const [isSuccess, setIsSuccess] = useState(false);
   const tier = searchParams.get('tier') || 'worker';
   const details = tierDetails[tier as keyof typeof tierDetails] || tierDetails.worker;
+  
+  const formSchema = getFormSchema(tier);
+  type FormValues = z.infer<typeof formSchema>;
+
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -102,6 +138,8 @@ function RegistrationFormComponent() {
       skills: '',
       goals: '',
       otherIndustry: '',
+      companyName: '',
+      workforceNeeds: '',
     },
   });
 
@@ -203,19 +241,36 @@ function RegistrationFormComponent() {
                         </FormItem>
                       )}
                     />
-                    <FormField
-                      control={form.control}
-                      name="skills"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Your primary skills</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., carpentry, coding, sales" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                    {tier === 'worker' && (
+                        <FormField
+                            control={form.control}
+                            name="skills"
+                            render={({ field }) => (
+                                <FormItem>
+                                <FormLabel>Your primary skills</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="e.g., carpentry, coding, sales" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    )}
+                    {(tier === 'employer' || tier === 'partner') && (
+                         <FormField
+                            control={form.control}
+                            name="companyName"
+                            render={({ field }) => (
+                                <FormItem>
+                                <FormLabel>{tier === 'employer' ? 'Company/Organization Name' : 'Organization Name'}</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="e.g., Acme Inc." {...field} />
+                                </FormControl>
+                                <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    )}
                  </div>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FormField
@@ -257,46 +312,93 @@ function RegistrationFormComponent() {
                     )}
                  </div>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {tier === 'worker' && (
+                        <FormField
+                            control={form.control}
+                            name="experienceLevel"
+                            render={({ field }) => (
+                                <FormItem>
+                                <FormLabel>Experience Level</FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <FormControl>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select your experience level" />
+                                    </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {experienceLevels.map(level => (
+                                            <SelectItem key={level} value={level}>{level}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    )}
+                     {tier === 'employer' && (
+                        <FormField
+                            control={form.control}
+                            name="companySize"
+                            render={({ field }) => (
+                                <FormItem>
+                                <FormLabel>Company Size</FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <FormControl>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select your company size" />
+                                    </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {companySizes.map(level => (
+                                            <SelectItem key={level} value={level}>{level}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    )}
+                 </div>
+                 {tier === 'worker' && (
                     <FormField
                         control={form.control}
-                        name="experienceLevel"
+                        name="goals"
                         render={({ field }) => (
                             <FormItem>
-                            <FormLabel>Experience Level</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <FormControl>
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Select your experience level" />
-                                </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    {experienceLevels.map(level => (
-                                        <SelectItem key={level} value={level}>{level}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                            <FormLabel>Tell us about your career goals and why you want to join PAGR...</FormLabel>
+                            <FormControl>
+                                <Textarea
+                                placeholder="I want to..."
+                                className="min-h-[100px]"
+                                {...field}
+                                />
+                            </FormControl>
                             <FormMessage />
                             </FormItem>
                         )}
                     />
-                 </div>
-                 <FormField
-                    control={form.control}
-                    name="goals"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Tell us about your career goals and why you want to join PAGR...</FormLabel>
-                        <FormControl>
-                            <Textarea
-                            placeholder="I want to..."
-                            className="min-h-[100px]"
-                            {...field}
-                            />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                 />
+                 )}
+                  {(tier === 'employer' || tier === 'partner') && (
+                    <FormField
+                        control={form.control}
+                        name="workforceNeeds"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>{tier === 'employer' ? 'Describe your workforce needs and partnership goals...' : 'Describe your partnership goals...'}</FormLabel>
+                            <FormControl>
+                                <Textarea
+                                placeholder="We are looking for..."
+                                className="min-h-[100px]"
+                                {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                  )}
                  <div className="flex flex-col-reverse gap-4 pt-4 sm:flex-row sm:justify-between">
                     <Button variant="outline" type="button" onClick={() => router.back()} className="w-full sm:w-auto">
                         <ArrowLeft className="mr-2 h-4 w-4" />
