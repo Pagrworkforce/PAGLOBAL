@@ -20,6 +20,7 @@ import {
   AlertDialogTitle,
   AlertDialogDescription,
 } from '@/components/ui/alert-dialog';
+import { sendTelegramNotification } from '@/actions/send-telegram-notification';
 
 
 const industries = [
@@ -146,18 +147,30 @@ function RegistrationFormComponent() {
   const watchedIndustry = form.watch('industry');
 
   const onSubmit = async (values: FormValues) => {
-    if (details.fee === 'Free') {
-        setIsSuccess(true);
-        return;
+    try {
+        await sendTelegramNotification(values, tier);
+
+        if (details.fee === 'Free') {
+            setIsSuccess(true);
+            return;
+        }
+        
+        const params = new URLSearchParams({
+            tier,
+            fee: details.fee,
+            fullName: values.fullName,
+            email: values.email,
+        });
+        router.push(`/payment?${params.toString()}`);
+
+    } catch (error) {
+        console.error('Failed to send notification', error);
+        toast({
+            title: 'Submission Failed',
+            description: 'There was a problem submitting your registration. Please try again.',
+            variant: 'destructive'
+        })
     }
-    
-    const params = new URLSearchParams({
-        tier,
-        fee: details.fee,
-        fullName: values.fullName,
-        email: values.email,
-    });
-    router.push(`/payment?${params.toString()}`);
   };
 
   if (isSuccess && details.fee === 'Free') {
