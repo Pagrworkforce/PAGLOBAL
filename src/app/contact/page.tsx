@@ -23,9 +23,15 @@ const registrationTiers = [
   {
     id: 'workers',
     title: 'Join as Worker',
-    description: 'Access WorkID, SecondBank, JobXpat training, and more.',
+    description: 'The real value starts here.',
     price: '₦2,000',
-    features: ['Early membership benefits'],
+    features: [
+        'Personal Development Training (Work identity, self-worth, employability).',
+        'Community Support: Join an active worker community that looks out for one another.',
+        'Early Worker Advantage: Be among the first to access and use WorkID when it launches.',
+        'Guided Briefings on all PAGR platforms + how they benefit workers.',
+        'Exclusive Member Support: Practical guidance on career, rights, and opportunities.',
+    ],
     buttonText: 'Get Started',
     href: '/register?tier=worker'
   },

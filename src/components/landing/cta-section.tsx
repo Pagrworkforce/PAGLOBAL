@@ -4,10 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import Link from 'next/link';
 
 const workerBenefits = [
-  'Get your WorkID and be recognized as a professional.',
-  'Access training, jobs, and income opportunities.',
-  'Join the movement for only ₦2,000.',
-  'Earn more through our referral program.',
+  'Personal Development Training (Work identity, self-worth, employability).',
+  'Community Support: Join an active worker community that looks out for one another.',
+  'Early Worker Advantage: Be among the first to access and use WorkID when it launches.',
+  'Guided Briefings on all PAGR platforms + how they benefit workers.',
+  'Exclusive Member Support: Practical guidance on career, rights, and opportunities.',
 ];
 
 const employerBenefits = [
@@ -68,8 +69,7 @@ export function CtaSection() {
               </CardHeader>
               <CardContent className="flex flex-1 flex-col">
                 <p className="mb-6 text-muted-foreground">
-                  Unlock your full potential and join a community that values your
-                  work.
+                  The real value starts here. Unlock your full potential and join a community that values your work.
                 </p>
                 <ul className="mb-8 space-y-3 flex-grow">
                   {workerBenefits.map((benefit, index) => (
