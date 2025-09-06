@@ -7,6 +7,20 @@ import Link from 'next/link';
 
 const registrationTiers = [
   {
+    id: 'worker-membership',
+    title: 'Worker Membership',
+    description: 'Free Trial (Test Access). Only a brief introduction to what PAGR is about.',
+    price: 'Free',
+    features: [
+      'Get an overview of our platforms (WorkID, JobXpat, SeenX, etc).',
+      'Limited time in the community (just awareness level).',
+      'No personal development training or community support.',
+      'Purpose: Just to "taste" the movement - then upgrade to ₦2k membership.',
+    ],
+    buttonText: 'Get Started',
+    href: '/register?tier=worker&free=true'
+  },
+  {
     id: 'workers',
     title: 'Join as Worker',
     description: 'Access WorkID, SecondBank, JobXpat training, and more.',
@@ -76,7 +90,7 @@ export default function ContactPage() {
                 Choose your registration type and become part of Africa's workforce revolution.
               </p>
             </div>
-            <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
               {registrationTiers.map((tier) => (
                 <Card id={tier.id} key={tier.title} className="flex transform flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
                   <CardHeader>

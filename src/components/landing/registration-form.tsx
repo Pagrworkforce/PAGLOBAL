@@ -88,6 +88,13 @@ const tierDetails = {
     submitText: 'Proceed to Payment',
     schema: workerSchema,
   },
+  'worker-freetrial': {
+    title: 'Worker Membership (Free Trial)',
+    description: 'Get a feel for the PAGR movement before committing.',
+    fee: 'Free',
+    submitText: 'Start Free Trial',
+    schema: baseSchema, // Only basic info needed for free trial
+  },
   employer: {
     title: 'Employer Partnership',
     description: 'Access our talent pool and workforce infrastructure.',
@@ -104,7 +111,10 @@ const tierDetails = {
   },
 };
 
-function getFormSchema(tier: string) {
+function getFormSchema(tier: string, isFree: boolean) {
+    if (tier === 'worker' && isFree) {
+        return tierDetails['worker-freetrial'].schema;
+    }
     const schema = tierDetails[tier as keyof typeof tierDetails]?.schema || workerSchema;
     return schema.refine(data => {
         if (data.industry === 'Others (please specify)') {
@@ -123,10 +133,13 @@ function RegistrationFormComponent() {
   const searchParams = useSearchParams();
   const { toast } = useToast();
   const [isSuccess, setIsSuccess] = useState(false);
+
   const tier = searchParams.get('tier') || 'worker';
-  const details = tierDetails[tier as keyof typeof tierDetails] || tierDetails.worker;
+  const isFreeTrial = searchParams.get('free') === 'true';
+  const tierKey = tier === 'worker' && isFreeTrial ? 'worker-freetrial' : tier;
+  const details = tierDetails[tierKey as keyof typeof tierDetails] || tierDetails.worker;
   
-  const formSchema = getFormSchema(tier);
+  const formSchema = getFormSchema(tier, isFreeTrial);
   type FormValues = z.infer<typeof formSchema>;
 
 
@@ -148,7 +161,8 @@ function RegistrationFormComponent() {
 
   const onSubmit = async (values: FormValues) => {
     try {
-        await sendTelegramNotification(values, tier);
+        const submissionTier = tier === 'worker' && isFreeTrial ? 'worker-freetrial' : tier;
+        await sendTelegramNotification(values, submissionTier);
 
         if (details.fee === 'Free') {
             setIsSuccess(true);
@@ -174,6 +188,11 @@ function RegistrationFormComponent() {
   };
 
   if (isSuccess && details.fee === 'Free') {
+      const successTitle = isFreeTrial ? "Free Trial Activated!" : "Application Submitted!";
+      const successDescription = isFreeTrial
+        ? "Welcome to PAGR! You can now explore the basic features of our ecosystem."
+        : "Thank you for your interest in partnering with PAGR. We will be in touch shortly.";
+
       return (
          <AlertDialog open={isSuccess} onOpenChange={() => router.push('/')}>
             <AlertDialogContent>
@@ -186,9 +205,9 @@ function RegistrationFormComponent() {
                 </div>
                 <div className="text-center pb-6">
                     <CheckCircle className="mx-auto h-16 w-16 text-green-500 mb-4" />
-                    <AlertDialogTitle className="text-2xl">Application Submitted!</AlertDialogTitle>
+                    <AlertDialogTitle className="text-2xl">{successTitle}</AlertDialogTitle>
                     <AlertDialogDescription className="mt-2 max-w-sm mx-auto text-muted-foreground">
-                        Thank you for your interest in partnering with PAGR. We will be in touch shortly.
+                        {successDescription}
                     </AlertDialogDescription>
                 </div>
                 </AlertDialogHeader>
@@ -254,7 +273,7 @@ function RegistrationFormComponent() {
                         </FormItem>
                       )}
                     />
-                    {tier === 'worker' && (
+                    {tier === 'worker' && !isFreeTrial && (
                         <FormField
                             control={form.control}
                             name="skills"
@@ -325,7 +344,7 @@ function RegistrationFormComponent() {
                     )}
                  </div>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {tier === 'worker' && (
+                    {tier === 'worker' && !isFreeTrial && (
                         <FormField
                             control={form.control}
                             name="experienceLevel"
@@ -374,7 +393,7 @@ function RegistrationFormComponent() {
                         />
                     )}
                  </div>
-                 {tier === 'worker' && (
+                 {tier === 'worker' && !isFreeTrial && (
                     <FormField
                         control={form.control}
                         name="goals"
