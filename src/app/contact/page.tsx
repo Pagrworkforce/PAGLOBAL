@@ -12,7 +12,7 @@ const registrationTiers = [
     description: 'Free Trial (Test Access). Only a brief introduction to what PAGR is about.',
     price: 'Free',
     features: [
-      'Get an overview of our platforms (WorkID, JobXpat, SeenX, etc).',
+      'Get an overview of our platforms (WorkID, JobXpat, SecondBank, etc).',
       'Limited time in the community (just awareness level).',
       'No personal development training or community support.',
       'Purpose: Just to "taste" the movement - then upgrade to ₦2k membership.',

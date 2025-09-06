@@ -25,7 +25,7 @@ const partnerBenefits = [
 
 const freeTrialBenefits = [
     'Only a brief introduction to what PAGR is about.',
-    'Get an overview of our platforms (WorkID, JobXpat, SeenX, etc).',
+    'Get an overview of our platforms (WorkID, JobXpat, SecondBank, etc).',
     'Limited time in the community (just awareness level).',
     'No personal development training or community support.',
 ]
