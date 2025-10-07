@@ -1,12 +1,18 @@
 import { Facebook, Linkedin, Mail, MapPin, Twitter } from 'lucide-react';
 import Link from 'next/link';
+import { PagrLogo } from './pagr-logo';
 
 export function Footer() {
   return (
     <footer className="bg-primary/10 py-12">
       <div className="container mx-auto grid grid-cols-1 gap-8 px-4 md:grid-cols-3 md:px-6">
         <div className="space-y-4">
-          <h3 className="font-headline text-2xl font-bold text-primary">PAGR</h3>
+          <Link href="/" className="flex items-center gap-2">
+            <PagrLogo className="h-8 w-8 text-primary" />
+            <span className="font-headline text-2xl font-bold text-primary">
+              PAGR
+            </span>
+          </Link>
           <p className="max-w-xs text-sm text-muted-foreground">
             Point Assiduous Global Resource (PAGR) is Africa’s first Workforce
             Infrastructure Company, dedicated to unifying, beautifying, and
