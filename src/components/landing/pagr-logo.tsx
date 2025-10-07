@@ -1,20 +1,16 @@
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 export function PagrLogo({ className }: { className?: string }) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={cn(className)}
-    >
-      <path d="M12 2L2 7l10 5 10-5-10-5z" />
-      <path d="M2 17l10 5 10-5" />
-      <path d="M2 12l10 5 10-5" />
-    </svg>
+    <div className={cn('relative', className)}>
+      <Image
+        src="https://i.imgur.com/dT4fH6b.jpeg"
+        alt="PAGR Logo"
+        width={28}
+        height={28}
+        className="rounded-full"
+      />
+    </div>
   );
 }
