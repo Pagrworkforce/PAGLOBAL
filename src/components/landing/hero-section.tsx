@@ -8,7 +8,7 @@ export function HeroSection() {
       <Image
         src="https://i.imgur.com/Tk9cSEK.jpeg"
         alt="African workforce"
-        data-ai-hint="PAGR logo"
+        data-ai-hint="african workforce"
         fill
         className="object-cover"
         priority
