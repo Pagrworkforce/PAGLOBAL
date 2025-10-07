@@ -9,15 +9,10 @@ export function PagrLogo({ className }: { className?: string }) {
       className={cn(className)}
     >
         <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90C72.0914 90 90 72.0914 90 50C90 27.9086 72.0914 10 50 10ZM50 26C36.7452 26 26 36.7452 26 50C26 63.2548 36.7452 74 50 74C63.2548 74 74 63.2548 74 50C74 36.7452 63.2548 26 50 26Z"
+            d="M50 100C77.6142 100 100 77.6142 100 50C100 22.3858 77.6142 0 50 0C22.3858 0 0 22.3858 0 50C0 77.6142 22.3858 100 50 100Z"
             fill="currentColor"
         />
-        <path
-            d="M50 0L30 30H70L50 0Z"
-            fill="hsl(var(--background))"
-        />
+        <path d="M50 0L30 30H70L50 0Z" fill="hsl(var(--background))" />
     </svg>
   );
 }
