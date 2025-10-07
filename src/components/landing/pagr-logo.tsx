@@ -8,11 +8,16 @@ export function PagrLogo({ className }: { className?: string }) {
       fill="none"
       className={cn(className)}
     >
-      <circle cx="50" cy="50" r="48" stroke="currentColor" strokeWidth="4" />
-      <path
-        d="M35 35 V 65 H 45 V 50 H 55 C 63.28 50 70 43.28 70 35 H 60 C 60 37.76 57.76 40 55 40 H 45 V 35 H 35 Z"
-        fill="currentColor"
-      />
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90C72.0914 90 90 72.0914 90 50C90 27.9086 72.0914 10 50 10ZM50 26C36.7452 26 26 36.7452 26 50C26 63.2548 36.7452 74 50 74C63.2548 74 74 63.2548 74 50C74 36.7452 63.2548 26 50 26Z"
+            fill="currentColor"
+        />
+        <path
+            d="M50 0L30 30H70L50 0Z"
+            fill="hsl(var(--background))"
+        />
     </svg>
   );
 }
