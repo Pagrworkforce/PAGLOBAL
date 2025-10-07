@@ -6,9 +6,9 @@ export function HeroSection() {
   return (
     <section className="relative h-[80vh] min-h-[600px] w-full">
       <Image
-        src="https://i.imgur.com/Tk9cSEK.jpeg"
+        src="https://financialstreet.ng/wp-content/uploads/2021/06/G7-DFIs-partners-raise-80bn-to-boost-African-economy.jpg"
         alt="African workforce"
-        data-ai-hint="african workforce"
+        data-ai-hint="african economy business"
         fill
         className="object-cover"
         priority
