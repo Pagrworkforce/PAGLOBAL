@@ -6,9 +6,9 @@ export function HeroSection() {
   return (
     <section className="relative h-[80vh] min-h-[600px] w-full">
       <Image
-        src="https://equitablegrowth.org/wp-content/uploads/2025/05/Job-quality-1080x675.jpeg"
+        src="https://i.imgur.com/Tk9cSEK.jpeg"
         alt="African workforce"
-        data-ai-hint="african workforce"
+        data-ai-hint="PAGR logo"
         fill
         className="object-cover"
         priority
